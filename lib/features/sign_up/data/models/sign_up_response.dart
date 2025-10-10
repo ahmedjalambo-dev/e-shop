@@ -8,5 +8,5 @@ class SignUpResponse {
   final String? message;
   SignUpResponse({this.message});
   factory SignUpResponse.fromJson(Map<String, dynamic> json) =>
-      _$SignupResponseFromJson(json);
+      _$SignUpResponseFromJson(json);
 }

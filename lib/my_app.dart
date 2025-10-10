@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         onGenerateRoute: myRouter.generateRoute,
-        initialRoute: MyRoutes.signUp,
+        initialRoute: MyRoutes.onboarding,
       ),
     );
   }

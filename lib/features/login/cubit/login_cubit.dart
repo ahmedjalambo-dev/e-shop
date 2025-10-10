@@ -13,6 +13,13 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  // For real-time password validation UI
+  bool hasMinLength = false;
+  bool hasUpperCaseLetter = false;
+  bool hasLowerCaseLetter = false;
+  bool hasDigit = false;
+  bool hasSpecialCharacter = false;
+
   void emitLoginStates() async {
     emit(LoginState.loading());
     final response = await _loginRepo.login(

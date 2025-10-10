@@ -1,18 +1,21 @@
+import 'package:eshop/core/helpers/extentions.dart';
 import 'package:eshop/core/helpers/my_validator.dart';
 import 'package:eshop/core/helpers/spaceing.dart';
+import 'package:eshop/core/routes/my_routes.dart';
+import 'package:eshop/core/themes/my_styles.dart';
 import 'package:eshop/features/login/cubit/login_cubit.dart';
 import 'package:eshop/features/login/widgets/my_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class EmailAndPasswordForm extends StatefulWidget {
-  const EmailAndPasswordForm({super.key});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
 
   @override
-  State<EmailAndPasswordForm> createState() => _EmailAndPasswordFormState();
+  State<LoginForm> createState() => _LoginFormState();
 }
 
-class _EmailAndPasswordFormState extends State<EmailAndPasswordForm> {
+class _LoginFormState extends State<LoginForm> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   bool isObscureText = true;
@@ -77,6 +80,17 @@ class _EmailAndPasswordFormState extends State<EmailAndPasswordForm> {
               child: Icon(
                 isObscureText ? Icons.visibility_off : Icons.visibility,
               ),
+            ),
+          ),
+          verticalSapce(10), // Add space
+          // Add Forgot Password Button
+          GestureDetector(
+            onTap: () {
+              context.pushNamed(MyRoutes.forgotPassword);
+            },
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text('Forgot Password?', style: MyStyles.font14w500Grey),
             ),
           ),
         ],

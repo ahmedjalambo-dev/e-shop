@@ -16,5 +16,5 @@ class SignUpRequestBody {
     required this.LastName,
   });
 
-  Map<String, dynamic> toJson() => _$SignupRequestBodyToJson(this);
+  Map<String, dynamic> toJson() => _$SignUpRequestBodyToJson(this);
 }

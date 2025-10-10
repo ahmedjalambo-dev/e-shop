@@ -6,18 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
-  final SignUpRepo _signupRepo;
-  SignUpCubit(this._signupRepo) : super(SignUpState.initial());
+  final SignUpRepo _signUpRepo;
+  SignUpCubit(this._signUpRepo) : super(SignUpState.initial());
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
+  // For real-time password validation UI
+  bool hasMinLength = false;
+  bool hasUpperCaseLetter = false;
+  bool hasLowerCaseLetter = false;
+  bool hasDigit = false;
+  bool hasSpecialCharacter = false;
 
   void emitSignupStates() async {
     emit(SignUpState.loading());
-    final response = await _signupRepo.signup(
+    final response = await _signUpRepo.signUp(
       SignUpRequestBody(
         email: emailController.text,
         password: passwordController.text,

@@ -1,6 +1,7 @@
 import 'package:eshop/core/helpers/spaceing.dart';
 import 'package:eshop/core/themes/my_styles.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
+import 'package:eshop/features/login/widgets/password_validations.dart';
 import 'package:eshop/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:eshop/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
 import 'package:eshop/features/sign_up/ui/widgets/sign_up_form.dart';
@@ -32,6 +33,20 @@ class SignUpScreen extends StatelessWidget {
               Text('Create\nAccount', style: MyStyles.font52w700black),
               verticalSapce(17),
               const SignupForm(),
+              verticalSapce(10),
+              PasswordValidations(
+                hasMinLength: context.watch<SignUpCubit>().hasMinLength,
+                hasUpperCaseLetter: context
+                    .watch<SignUpCubit>()
+                    .hasUpperCaseLetter,
+                hasLowerCaseLetter: context
+                    .watch<SignUpCubit>()
+                    .hasLowerCaseLetter,
+                hasDigit: context.watch<SignUpCubit>().hasDigit,
+                hasSpecialCharacter: context
+                    .watch<SignUpCubit>()
+                    .hasSpecialCharacter,
+              ),
               verticalSapce(37),
               MyTextButton(
                 text: 'Done',

@@ -21,7 +21,9 @@ class SignUpBlocListener extends StatelessWidget {
           ),
           success: (data) {
             context.pop();
-            context.pushNamed(MyRoutes.login);
+            // Get the email from the cubit
+            final email = context.read<SignUpCubit>().emailController.text;
+            context.pushNamed(MyRoutes.verify_email, arguments: email);
           },
           failure: (message) {
             context.pop();

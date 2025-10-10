@@ -1,9 +1,10 @@
 import 'package:eshop/core/helpers/spaceing.dart';
 import 'package:eshop/core/themes/my_styles.dart';
 import 'package:eshop/features/login/cubit/login_cubit.dart';
-import 'package:eshop/features/login/widgets/email_and_password_form.dart';
+import 'package:eshop/features/login/widgets/login_form.dart';
 import 'package:eshop/features/login/widgets/login_bloc_listener.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
+import 'package:eshop/features/login/widgets/password_validations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,7 +44,21 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               verticalSapce(17),
-              const EmailAndPasswordForm(),
+              const LoginForm(),
+              verticalSapce(10),
+              PasswordValidations(
+                hasMinLength: context.watch<LoginCubit>().hasMinLength,
+                hasUpperCaseLetter: context
+                    .watch<LoginCubit>()
+                    .hasUpperCaseLetter,
+                hasLowerCaseLetter: context
+                    .watch<LoginCubit>()
+                    .hasLowerCaseLetter,
+                hasDigit: context.watch<LoginCubit>().hasDigit,
+                hasSpecialCharacter: context
+                    .watch<LoginCubit>()
+                    .hasSpecialCharacter,
+              ),
               verticalSapce(37),
               MyTextButton(
                 text: 'Next',
@@ -52,6 +67,7 @@ class LoginScreen extends StatelessWidget {
                   ValidationThenLogin(context);
                 },
               ),
+
               LoginBlocListener(),
             ],
           ),
