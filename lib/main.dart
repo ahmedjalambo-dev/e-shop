@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupGetIt();
-  await checkIfLoggedInUser();
-  runApp(MyApp(myRouter: MyRouter()));
-}
+  await setupGetIt();
 
-Future<void> checkIfLoggedInUser() async {
-  String userToken = await SharedPrefHelper.getString(SharedPrefKeys.userToken);
-  userToken.isNotEmpty ? isLoggedUser = true : isLoggedUser = false;
+  // 1. Get the token directly here
+  final userToken = await SharedPrefHelper.getString(SharedPrefKeys.userToken);
+  final bool isLoggedIn = userToken != null && userToken.isNotEmpty;
+
+  // 2. Pass the result into MyApp's constructor
+  runApp(MyApp(myRouter: MyRouter(), isLoggedIn: isLoggedIn));
 }

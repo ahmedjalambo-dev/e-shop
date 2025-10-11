@@ -1,4 +1,3 @@
-import 'package:eshop/core/cache/shared_pref_keys.dart';
 import 'package:eshop/core/routes/my_routes.dart';
 import 'package:eshop/core/themes/my_color.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
   final MyRouter myRouter;
-  const MyApp({super.key, required this.myRouter});
+  final bool isLoggedIn;
+
+  const MyApp({super.key, required this.myRouter, required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +20,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'eshop app',
         theme: ThemeData(
-          primaryColor: MyColor.myBlue,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: MyColor.myBlack,
+          ).copyWith(primary: MyColor.myBlue, secondary: MyColor.myGray),
           scaffoldBackgroundColor: Colors.white,
         ),
         onGenerateRoute: myRouter.generateRoute,
-        initialRoute: isLoggedUser ? MyRoutes.home : MyRoutes.onboarding,
+        initialRoute: isLoggedIn ? MyRoutes.home : MyRoutes.onboarding,
       ),
     );
   }
