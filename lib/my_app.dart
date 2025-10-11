@@ -1,3 +1,4 @@
+import 'package:eshop/core/cache/shared_pref_keys.dart';
 import 'package:eshop/core/routes/my_routes.dart';
 import 'package:eshop/core/themes/my_color.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         onGenerateRoute: myRouter.generateRoute,
-        initialRoute: MyRoutes.onboarding,
+        initialRoute: isLoggedUser ? MyRoutes.home : MyRoutes.onboarding,
       ),
     );
   }
