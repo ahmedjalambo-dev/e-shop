@@ -1,4 +1,4 @@
-import 'package:eshop/core/helpers/extentions.dart';
+import 'package:eshop/core/extentions/extentions.dart';
 import 'package:eshop/core/routes/my_routes.dart';
 import 'package:eshop/features/reset_password/cubit/reset_password_cubit.dart';
 import 'package:eshop/features/reset_password/cubit/reset_password_state.dart';

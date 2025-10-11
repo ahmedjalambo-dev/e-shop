@@ -1,6 +1,6 @@
-import 'package:eshop/core/helpers/extentions.dart';
-import 'package:eshop/core/helpers/my_validator.dart';
-import 'package:eshop/core/helpers/spaceing.dart';
+import 'package:eshop/core/extentions/extentions.dart';
+import 'package:eshop/core/helpers/validator_helper.dart';
+import 'package:eshop/core/helpers/spaceing_helper.dart';
 import 'package:eshop/core/routes/my_routes.dart';
 import 'package:eshop/core/themes/my_styles.dart';
 import 'package:eshop/features/login/cubit/login_cubit.dart';
@@ -47,12 +47,14 @@ class _LoginFormState extends State<LoginForm> {
   void _updatePasswordValidations() {
     final password = passwordController.text;
     setState(() {
-      hasMinLength = MyValidator.validateMinLength(password, 8) == null;
-      hasUpperCaseLetter = MyValidator.validateHasUppercase(password) == null;
-      hasLowerCaseLetter = MyValidator.validateHasLowercase(password) == null;
-      hasDigit = MyValidator.validateHasDigit(password) == null;
+      hasMinLength = ValidatorHelper.validateMinLength(password, 8) == null;
+      hasUpperCaseLetter =
+          ValidatorHelper.validateHasUppercase(password) == null;
+      hasLowerCaseLetter =
+          ValidatorHelper.validateHasLowercase(password) == null;
+      hasDigit = ValidatorHelper.validateHasDigit(password) == null;
       hasSpecialCharacter =
-          MyValidator.validateHasSpecialCharacter(password) == null;
+          ValidatorHelper.validateHasSpecialCharacter(password) == null;
     });
   }
 
@@ -66,14 +68,14 @@ class _LoginFormState extends State<LoginForm> {
             controller: emailController,
             hintText: 'Email',
             // 1. Cleaner Email Validation
-            validator: (email) => MyValidator.validateEmail(email),
+            validator: (email) => ValidatorHelper.validateEmail(email),
           ),
           verticalSapce(10),
           MyTextFormField(
             controller: passwordController,
             hintText: 'Password',
             // 2. More Specific Password Validation
-            validator: (password) => MyValidator.validatePassword(password),
+            validator: (password) => ValidatorHelper.validatePassword(password),
             isObscureText: isObscureText,
             suffixIcon: GestureDetector(
               onTap: () => setState(() => isObscureText = !isObscureText),

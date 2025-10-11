@@ -1,5 +1,5 @@
-import 'package:eshop/core/helpers/my_validator.dart';
-import 'package:eshop/core/helpers/spaceing.dart';
+import 'package:eshop/core/helpers/validator_helper.dart';
+import 'package:eshop/core/helpers/spaceing_helper.dart';
 import 'package:eshop/core/themes/my_styles.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
 import 'package:eshop/features/forgot_password/cubit/forgot_password_cubit.dart';
@@ -34,12 +34,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                       .read<ForgotPasswordCubit>()
                       .emailController,
                   hintText: 'Email Address',
-                  validator: (email) => MyValidator.validateEmail(email),
+                  validator: (email) => ValidatorHelper.validateEmail(email),
                 ),
               ),
               verticalSapce(40),
               MyTextButton(
-                text: 'Send Reset Link',
+                text: 'Send OTP',
                 textStyle: MyStyles.font22w300LighterGrey,
                 onPressed: () {
                   validateAndSubmit(context);

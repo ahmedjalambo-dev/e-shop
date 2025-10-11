@@ -1,5 +1,5 @@
-import 'package:eshop/core/helpers/my_validator.dart';
-import 'package:eshop/core/helpers/spaceing.dart';
+import 'package:eshop/core/helpers/validator_helper.dart';
+import 'package:eshop/core/helpers/spaceing_helper.dart';
 import 'package:eshop/core/themes/my_styles.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
 import 'package:eshop/features/login/widgets/my_text_form_field.dart';
@@ -62,7 +62,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     controller: _cubit.newPasswordController,
                     hintText: 'New Password',
                     validator: (password) =>
-                        MyValidator.validatePassword(password),
+                        ValidatorHelper.validatePassword(password),
                   ),
                   verticalSapce(20),
                   PasswordValidations(

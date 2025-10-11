@@ -4,8 +4,8 @@ class ApiConstant {
   static const String signUp = 'api/auth/register';
   static const String verifyEmail = 'api/auth/verify-email';
   static const String resendOtp = 'api/auth/resend-otp';
-   static const String forgotPassword = 'api/auth/forgot-password';
-   static const String resetPassword = 'api/auth/reset-password';
+  static const String forgotPassword = 'api/auth/forgot-password';
+  static const String resetPassword = 'api/auth/reset-password';
 }
 
 class ApiErrors {

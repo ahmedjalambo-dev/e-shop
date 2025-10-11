@@ -1,4 +1,8 @@
+import 'package:eshop/core/cache/shared_pref_keys.dart';
+import 'package:eshop/core/helpers/shared_pref_helper.dart';
+import 'package:eshop/core/helpers/validator_helper.dart';
 import 'package:eshop/core/netowoks/api_result.dart';
+import 'package:eshop/core/netowoks/dio_factory.dart';
 import 'package:eshop/features/login/cubit/login_state.dart';
 import 'package:eshop/features/login/data/models/login_request_body.dart';
 import 'package:eshop/features/login/data/repos/login_repo.dart';
@@ -20,6 +24,16 @@ class LoginCubit extends Cubit<LoginState> {
   bool hasDigit = false;
   bool hasSpecialCharacter = false;
 
+  void updatePasswordValidations(String password) {
+    hasMinLength = ValidatorHelper.validateMinLength(password, 8) == null;
+    hasUpperCaseLetter = ValidatorHelper.validateHasUppercase(password) == null;
+    hasLowerCaseLetter = ValidatorHelper.validateHasLowercase(password) == null;
+    hasDigit = ValidatorHelper.validateHasDigit(password) == null;
+    hasSpecialCharacter =
+        ValidatorHelper.validateHasSpecialCharacter(password) == null;
+    // Emit a state to rebuild the UI, or handle this within a StatefulWidget's setState
+  }
+
   void emitLoginStates() async {
     emit(LoginState.loading());
     final response = await _loginRepo.login(
@@ -29,9 +43,18 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(
-      success: (loginResponse) => emit(LoginState.success(loginResponse)),
+      success: (loginResponse) async {
+        await saveUserToken(loginResponse.accessToken);
+        emit(LoginState.success(loginResponse));
+      },
       failure: (error) =>
           emit(LoginState.failure(error.apiErrorModel.message ?? '')),
     );
+  }
+
+  Future<void> saveUserToken(String token) async {
+    // save token to shared pref
+    await SharedPrefHelper.setData(SharedPrefKeys.userToken, token);
+    DioFactory.setTokenIntoHeaderAfterLogin(token);
   }
 }

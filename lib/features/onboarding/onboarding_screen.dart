@@ -1,5 +1,5 @@
-import 'package:eshop/core/helpers/extentions.dart';
-import 'package:eshop/core/helpers/spaceing.dart';
+import 'package:eshop/core/extentions/extentions.dart';
+import 'package:eshop/core/helpers/spaceing_helper.dart';
 import 'package:eshop/core/routes/my_routes.dart';
 import 'package:eshop/core/themes/my_styles.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';

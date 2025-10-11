@@ -1,5 +1,5 @@
-import 'package:eshop/core/helpers/my_validator.dart';
-import 'package:eshop/core/helpers/spaceing.dart';
+import 'package:eshop/core/helpers/validator_helper.dart';
+import 'package:eshop/core/helpers/spaceing_helper.dart';
 import 'package:eshop/features/login/widgets/my_text_form_field.dart';
 import 'package:eshop/features/sign_up/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
@@ -50,12 +50,14 @@ class _SignupFormState extends State<SignupForm> {
     final password = passwordController.text;
     setState(() {
       // Use the MyValidator methods, checking for null to get a boolean.
-      hasMinLength = MyValidator.validateMinLength(password, 8) == null;
-      hasUpperCaseLetter = MyValidator.validateHasUppercase(password) == null;
-      hasLowerCaseLetter = MyValidator.validateHasLowercase(password) == null;
-      hasDigit = MyValidator.validateHasDigit(password) == null;
+      hasMinLength = ValidatorHelper.validateMinLength(password, 8) == null;
+      hasUpperCaseLetter =
+          ValidatorHelper.validateHasUppercase(password) == null;
+      hasLowerCaseLetter =
+          ValidatorHelper.validateHasLowercase(password) == null;
+      hasDigit = ValidatorHelper.validateHasDigit(password) == null;
       hasSpecialCharacter =
-          MyValidator.validateHasSpecialCharacter(password) == null;
+          ValidatorHelper.validateHasSpecialCharacter(password) == null;
     });
   }
 
@@ -70,7 +72,7 @@ class _SignupFormState extends State<SignupForm> {
             hintText: 'First Name',
             // Cleaner name validation
             validator: (firstName) =>
-                MyValidator.validateName(firstName, 'First name'),
+                ValidatorHelper.validateName(firstName, 'First name'),
           ),
           verticalSapce(10),
           MyTextFormField(
@@ -78,21 +80,21 @@ class _SignupFormState extends State<SignupForm> {
             hintText: 'Last Name',
             // Reusable name validation
             validator: (lastName) =>
-                MyValidator.validateName(lastName, 'Last name'),
+                ValidatorHelper.validateName(lastName, 'Last name'),
           ),
           verticalSapce(10),
           MyTextFormField(
             controller: emailController,
             hintText: 'Email',
             // Cleaner email validation
-            validator: (email) => MyValidator.validateEmail(email),
+            validator: (email) => ValidatorHelper.validateEmail(email),
           ),
           verticalSapce(10),
           MyTextFormField(
             controller: passwordController,
             hintText: 'Password',
             // More specific password validation
-            validator: (password) => MyValidator.validatePassword(password),
+            validator: (password) => ValidatorHelper.validatePassword(password),
             isObscureText: isObscureText,
             suffixIcon: GestureDetector(
               onTap: () => setState(() => isObscureText = !isObscureText),

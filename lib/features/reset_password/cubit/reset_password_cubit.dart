@@ -1,4 +1,4 @@
-import 'package:eshop/core/helpers/my_validator.dart';
+import 'package:eshop/core/helpers/validator_helper.dart';
 import 'package:eshop/core/netowoks/api_result.dart';
 import 'package:eshop/features/reset_password/cubit/reset_password_state.dart';
 import 'package:eshop/features/reset_password/data/models/reset_password_request_body.dart';
@@ -25,12 +25,12 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   bool hasSpecialCharacter = false;
 
   void updatePasswordValidations(String password) {
-    hasMinLength = MyValidator.validateMinLength(password, 8) == null;
-    hasUpperCaseLetter = MyValidator.validateHasUppercase(password) == null;
-    hasLowerCaseLetter = MyValidator.validateHasLowercase(password) == null;
-    hasDigit = MyValidator.validateHasDigit(password) == null;
+    hasMinLength = ValidatorHelper.validateMinLength(password, 8) == null;
+    hasUpperCaseLetter = ValidatorHelper.validateHasUppercase(password) == null;
+    hasLowerCaseLetter = ValidatorHelper.validateHasLowercase(password) == null;
+    hasDigit = ValidatorHelper.validateHasDigit(password) == null;
     hasSpecialCharacter =
-        MyValidator.validateHasSpecialCharacter(password) == null;
+        ValidatorHelper.validateHasSpecialCharacter(password) == null;
     // Emit a state to rebuild the UI, or handle this within a StatefulWidget's setState
   }
 

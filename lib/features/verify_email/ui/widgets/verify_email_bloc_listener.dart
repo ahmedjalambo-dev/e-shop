@@ -1,4 +1,4 @@
-import 'package:eshop/core/helpers/extentions.dart';
+import 'package:eshop/core/extentions/extentions.dart';
 import 'package:eshop/core/routes/my_routes.dart';
 import 'package:eshop/features/verify_email/cubit/verify_email_cubit.dart';
 import 'package:eshop/features/verify_email/cubit/verify_email_state.dart';
