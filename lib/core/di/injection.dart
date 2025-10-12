@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:eshop/core/netowoks/api_service.dart';
 import 'package:eshop/core/netowoks/dio_factory.dart';
-import 'package:eshop/features/forgot_password/cubit/forgot_password_cubit.dart';
-import 'package:eshop/features/forgot_password/data/repos/forgot_password_repo.dart';
-import 'package:eshop/features/login/cubit/login_cubit.dart';
-import 'package:eshop/features/login/data/repos/login_repo.dart';
-import 'package:eshop/features/reset_password/cubit/reset_password_cubit.dart';
-import 'package:eshop/features/reset_password/data/repos/reset_password_repo.dart';
-import 'package:eshop/features/sign_up/cubit/sign_up_cubit.dart';
-import 'package:eshop/features/sign_up/data/repos/sign_up_repo.dart';
-import 'package:eshop/features/verify_email/cubit/verify_email_cubit.dart';
-import 'package:eshop/features/verify_email/data/repos/verify_email_repo.dart';
+import 'package:eshop/features/auth/forgot_password/cubit/forgot_password_cubit.dart';
+import 'package:eshop/features/auth/forgot_password/data/repos/forgot_password_repo.dart';
+import 'package:eshop/features/auth/login/cubit/login_cubit.dart';
+import 'package:eshop/features/auth/login/data/repos/login_repo.dart';
+import 'package:eshop/features/auth/reset_password/cubit/reset_password_cubit.dart';
+import 'package:eshop/features/auth/reset_password/data/repos/reset_password_repo.dart';
+import 'package:eshop/features/auth/sign_up/cubit/sign_up_cubit.dart';
+import 'package:eshop/features/auth/sign_up/data/repos/sign_up_repo.dart';
+import 'package:eshop/features/auth/verify_email/cubit/verify_email_cubit.dart';
+import 'package:eshop/features/auth/verify_email/data/repos/verify_email_repo.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;

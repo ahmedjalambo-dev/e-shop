@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:eshop/features/forgot_password/data/models/forgot_password_request_body.dart';
-import 'package:eshop/features/login/data/models/login_request_body.dart';
-import 'package:eshop/features/login/data/models/login_response.dart';
-import 'package:eshop/features/reset_password/data/models/reset_password_request_body.dart';
-import 'package:eshop/features/sign_up/data/models/sign_up_request_body.dart';
-import 'package:eshop/features/sign_up/data/models/sign_up_response.dart';
-import 'package:eshop/features/verify_email/data/models/resend_otp_request_body.dart';
-import 'package:eshop/features/verify_email/data/models/verify_email_request_body.dart';
+import 'package:eshop/features/auth/forgot_password/data/models/forgot_password_request_body.dart';
+import 'package:eshop/features/auth/login/data/models/login_request_body.dart';
+import 'package:eshop/features/auth/login/data/models/login_response.dart';
+import 'package:eshop/features/auth/refresh_token/data/models/refresh_token_request_body.dart';
+import 'package:eshop/features/auth/reset_password/data/models/reset_password_request_body.dart';
+import 'package:eshop/features/auth/sign_up/data/models/sign_up_request_body.dart';
+import 'package:eshop/features/auth/sign_up/data/models/sign_up_response.dart';
+import 'package:eshop/features/auth/verify_email/data/models/resend_otp_request_body.dart';
+import 'package:eshop/features/auth/verify_email/data/models/verify_email_request_body.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:eshop/core/netowoks/api_constant.dart';
 
@@ -38,5 +39,10 @@ abstract class ApiService {
   @POST(ApiConstant.resetPassword)
   Future<String> resetPassword(
     @Body() ResetPasswordRequestBody resetPasswordRequestBody,
+  );
+
+  @POST(ApiConstant.refreshToken)
+  Future<LoginResponse> refreshToken(
+    @Body() RefreshTokenRequestBody refreshTokenRequestBody,
   );
 }

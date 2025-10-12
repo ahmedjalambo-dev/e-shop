@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:eshop/core/cache/shared_pref_keys.dart';
 import 'package:eshop/core/helpers/shared_pref_helper.dart';
+import 'package:eshop/core/netowoks/auth_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioFactory {
@@ -29,15 +30,16 @@ class DioFactory {
     dio?.options.headers = {
       'Content-Type': 'application/json',
       'Authorization':
-          'Bearer ${await SharedPrefHelper.getString(SharedPrefKeys.userToken)}',
+          'Bearer ${await SharedPrefHelper.getString(SharedPrefKeys.accessToken)}',
     };
   }
 
-  static void setTokenIntoHeaderAfterLogin(String token) {
+  static void setTokenIntoHeader(String token) {
     dio?.options.headers = {'Authorization': 'Bearer $token'};
   }
 
   static void addDioInterceptor() {
+    dio?.interceptors.add(AuthInterceptor());
     dio?.interceptors.add(
       PrettyDioLogger(
         requestBody: true,
