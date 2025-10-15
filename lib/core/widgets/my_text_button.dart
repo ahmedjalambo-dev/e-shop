@@ -31,10 +31,10 @@ class MyTextButton extends StatelessWidget {
           ),
         ),
         backgroundColor: WidgetStateProperty.all(
-          backgroundColor ?? MyColor.myBlue,
+          backgroundColor ?? MyColor.myBlack,
         ),
         fixedSize: WidgetStateProperty.all(
-          Size(width ?? double.maxFinite, height ?? 60),
+          Size(width ?? double.maxFinite, height ?? 50),
         ),
       ),
       onPressed: onPressed,

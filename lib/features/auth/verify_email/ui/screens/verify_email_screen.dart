@@ -1,7 +1,7 @@
 import 'package:eshop/core/helpers/spaceing_helper.dart';
-import 'package:eshop/core/themes/my_styles.dart';
+import 'package:eshop/core/themes/my_text_style.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
-import 'package:eshop/features/auth/login/widgets/my_text_form_field.dart';
+import 'package:eshop/core/widgets/my_text_form_field.dart';
 import 'package:eshop/features/auth/verify_email/cubit/verify_email_cubit.dart';
 import 'package:eshop/features/auth/verify_email/ui/widgets/verify_email_bloc_listener.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +23,11 @@ class VerifyEmailScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 verticalSapce(50),
-                Text('Verify Your Email', style: MyStyles.font52w700black),
+                Text('Verify Your Email', style: MyTextStyle.font52w700black),
                 verticalSapce(10),
                 Text(
                   'Please enter the 6-digit code sent to\n$email',
-                  style: MyStyles.font19w300Black,
+                  style: MyTextStyle.font19w300Black,
                 ),
                 verticalSapce(30),
                 Form(
@@ -49,7 +49,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 verticalSapce(40),
                 MyTextButton(
                   text: 'Verify',
-                  textStyle: MyStyles.font22w300LighterGrey,
+                  textStyle: MyTextStyle.font14w500White,
                   onPressed: () {
                     validateAndSubmit(context);
                   },
@@ -64,7 +64,7 @@ class VerifyEmailScreen extends StatelessWidget {
                     },
                     child: Text(
                       'Didn\'t receive a code? Resend OTP',
-                      style: MyStyles.font14w500Grey.copyWith(
+                      style: MyTextStyle.font14w400Grey.copyWith(
                         decoration: TextDecoration.underline,
                       ),
                     ),

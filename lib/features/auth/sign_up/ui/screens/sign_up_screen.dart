@@ -1,77 +1,43 @@
 import 'package:eshop/core/helpers/spaceing_helper.dart';
-import 'package:eshop/core/themes/my_styles.dart';
+import 'package:eshop/core/themes/my_text_style.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
-import 'package:eshop/features/auth/login/widgets/password_validations.dart';
 import 'package:eshop/features/auth/sign_up/cubit/sign_up_cubit.dart';
+import 'package:eshop/features/auth/sign_up/ui/widgets/already_have_account.dart';
 import 'package:eshop/features/auth/sign_up/ui/widgets/sign_up_bloc_listener.dart';
 import 'package:eshop/features/auth/sign_up/ui/widgets/sign_up_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends State<SignUpScreen> {
-    late final SignUpCubit _cubit;
-
-  @override
-  void initState() {
-    super.initState();
-    _cubit = context.read<SignUpCubit>();
-    _cubit.passwordController.addListener(() {
-      setState(() {
-        _cubit.updatePasswordValidations(_cubit.passwordController.text);
-      });
-    });
-  }
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/Bubbles.png"),
-            fit: BoxFit.contain,
-            alignment: AlignmentDirectional.topCenter,
-          ),
-        ),
-        child: SingleChildScrollView(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              verticalSapce(200),
-              Text('Create\nAccount', style: MyStyles.font52w700black),
-              verticalSapce(17),
-              const SignupForm(),
-              verticalSapce(10),
-              PasswordValidations(
-                hasMinLength: context.watch<SignUpCubit>().hasMinLength,
-                hasUpperCaseLetter: context
-                    .watch<SignUpCubit>()
-                    .hasUpperCaseLetter,
-                hasLowerCaseLetter: context
-                    .watch<SignUpCubit>()
-                    .hasLowerCaseLetter,
-                hasDigit: context.watch<SignUpCubit>().hasDigit,
-                hasSpecialCharacter: context
-                    .watch<SignUpCubit>()
-                    .hasSpecialCharacter,
+              verticalSapce(100),
+              Text(
+                'Create Account',
+                style: MyTextStyle.font52w700black.copyWith(height: 1),
               ),
-              verticalSapce(37),
+              verticalSapce(20),
+              const SignupForm(),
+              verticalSapce(30),
               MyTextButton(
                 text: 'Done',
-                textStyle: MyStyles.font22w300LighterGrey,
+                textStyle: MyTextStyle.font14w500White,
                 onPressed: () {
                   ValidationThenSignUp(context);
                 },
               ),
+              verticalSapce(30),
+              AlreadyHaveAccount(),
               SignUpBlocListener(),
             ],
           ),

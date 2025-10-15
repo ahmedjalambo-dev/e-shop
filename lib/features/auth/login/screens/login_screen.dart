@@ -1,92 +1,60 @@
 import 'package:eshop/core/helpers/spaceing_helper.dart';
-import 'package:eshop/core/themes/my_styles.dart';
+import 'package:eshop/core/themes/my_text_style.dart';
 import 'package:eshop/features/auth/login/cubit/login_cubit.dart';
+import 'package:eshop/features/auth/login/widgets/do_not_have_account.dart';
 import 'package:eshop/features/auth/login/widgets/login_form.dart';
 import 'package:eshop/features/auth/login/widgets/login_bloc_listener.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
-import 'package:eshop/features/auth/login/widgets/password_validations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-    late final LoginCubit _cubit;
-
-  @override
-  void initState() {
-    super.initState();
-    _cubit = context.read<LoginCubit>();
-    _cubit.passwordController.addListener(() {
-      setState(() {
-        _cubit.updatePasswordValidations(_cubit.passwordController.text);
-      });
-    });
-  }
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/Bubbles.png"),
-            fit: BoxFit.contain,
-            alignment: AlignmentDirectional.topCenter,
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              verticalSapce(200),
-              Text('Login', style: MyStyles.font52w700black),
-              Row(
-                children: [
-                  Text(
-                    'Good to see you back!',
-                    style: MyStyles.font19w300Black,
-                  ),
-                  horizontalSapce(10),
-                  SvgPicture.asset('assets/svgs/heart.svg', width: 16.w),
-                ],
-              ),
-              verticalSapce(17),
-              const LoginForm(),
-              verticalSapce(10),
-              PasswordValidations(
-                hasMinLength: context.watch<LoginCubit>().hasMinLength,
-                hasUpperCaseLetter: context
-                    .watch<LoginCubit>()
-                    .hasUpperCaseLetter,
-                hasLowerCaseLetter: context
-                    .watch<LoginCubit>()
-                    .hasLowerCaseLetter,
-                hasDigit: context.watch<LoginCubit>().hasDigit,
-                hasSpecialCharacter: context
-                    .watch<LoginCubit>()
-                    .hasSpecialCharacter,
-              ),
-              verticalSapce(37),
-              MyTextButton(
-                text: 'Next',
-                textStyle: MyStyles.font22w300LighterGrey,
-                onPressed: () {
-                  ValidationThenLogin(context);
-                },
-              ),
-
-              LoginBlocListener(),
-            ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                verticalSapce(100),
+                Text(
+                  'Login',
+                  style: MyTextStyle.font52w700black,
+                  textAlign: TextAlign.start,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Good to see you back!',
+                      style: MyTextStyle.font19w300Black,
+                    ),
+                    horizontalSapce(10),
+                    SvgPicture.asset('assets/svgs/heart.svg', width: 16.w),
+                  ],
+                ),
+                verticalSapce(20),
+                const LoginForm(),
+                verticalSapce(30),
+                MyTextButton(
+                  text: 'Next',
+                  textStyle: MyTextStyle.font14w500White,
+                  onPressed: () {
+                    ValidationThenLogin(context);
+                  },
+                ),
+                verticalSapce(30),
+                DoNotHaveAccount(),
+                LoginBlocListener(),
+              ],
+            ),
           ),
         ),
       ),

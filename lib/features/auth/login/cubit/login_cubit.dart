@@ -1,6 +1,5 @@
 import 'package:eshop/core/cache/shared_pref_keys.dart';
 import 'package:eshop/core/helpers/shared_pref_helper.dart';
-import 'package:eshop/core/helpers/validator_helper.dart';
 import 'package:eshop/core/netowoks/api_result.dart';
 import 'package:eshop/core/netowoks/dio_factory.dart';
 import 'package:eshop/features/auth/login/cubit/login_state.dart';
@@ -17,23 +16,6 @@ class LoginCubit extends Cubit<LoginState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  // For real-time password validation UI
-  bool hasMinLength = false;
-  bool hasUpperCaseLetter = false;
-  bool hasLowerCaseLetter = false;
-  bool hasDigit = false;
-  bool hasSpecialCharacter = false;
-
-  void updatePasswordValidations(String password) {
-    hasMinLength = ValidatorHelper.validateMinLength(password, 8) == null;
-    hasUpperCaseLetter = ValidatorHelper.validateHasUppercase(password) == null;
-    hasLowerCaseLetter = ValidatorHelper.validateHasLowercase(password) == null;
-    hasDigit = ValidatorHelper.validateHasDigit(password) == null;
-    hasSpecialCharacter =
-        ValidatorHelper.validateHasSpecialCharacter(password) == null;
-    // Emit a state to rebuild the UI, or handle this within a StatefulWidget's setState
-  }
 
   void emitLoginStates() async {
     emit(LoginState.loading());

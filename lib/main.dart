@@ -9,10 +9,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupGetIt();
 
-  // 1. Get the token directly here
   final userToken = await SharedPrefHelper.getString(SharedPrefKeys.accessToken);
   final bool isLoggedIn = userToken != null && userToken.isNotEmpty;
 
-  // 2. Pass the result into MyApp's constructor
   runApp(MyApp(myRouter: MyRouter(), isLoggedIn: isLoggedIn));
 }

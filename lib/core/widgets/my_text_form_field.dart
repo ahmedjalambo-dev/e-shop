@@ -1,5 +1,5 @@
 import 'package:eshop/core/themes/my_color.dart';
-import 'package:eshop/core/themes/my_styles.dart';
+import 'package:eshop/core/themes/my_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -37,11 +37,11 @@ class MyTextFormField extends StatelessWidget {
         isDense: true,
         contentPadding:
             contentPadding ??
-            EdgeInsets.symmetric(horizontal: 19.w, vertical: 16.h),
+            EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
         focusedBorder:
             focusedBorder ??
             OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.transparent),
+              borderSide: BorderSide(color: MyColor.mylighterGrey),
               borderRadius: BorderRadius.circular(16),
             ),
         enabledBorder:
@@ -59,18 +59,17 @@ class MyTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
 
-        hintStyle: hintStyle ?? MyStyles.font14w500Grey,
+        hintStyle: hintStyle ?? MyTextStyle.font14w400Grey,
         hintText: hintText,
         suffixIcon: suffixIcon,
-        suffixIconColor: MyColor.myGray,
-        fillColor: MyColor.mylighterGray,
-
+        suffixIconColor: MyColor.mylightestGrey,
+        fillColor: MyColor.mylightestGrey,
         filled: true,
       ),
 
       obscureText: isObscureText ?? false,
-      style: MyStyles.font14w500Black,
-      cursorColor: MyColor.myBlue,
+      style: MyTextStyle.font14w400Black,
+      cursorColor: MyColor.myBlack,
     );
   }
 }

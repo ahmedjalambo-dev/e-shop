@@ -2,9 +2,9 @@ import 'package:eshop/core/extentions/extentions.dart';
 import 'package:eshop/core/helpers/validator_helper.dart';
 import 'package:eshop/core/helpers/spaceing_helper.dart';
 import 'package:eshop/core/routes/my_routes.dart';
-import 'package:eshop/core/themes/my_styles.dart';
+import 'package:eshop/core/themes/my_text_style.dart';
 import 'package:eshop/features/auth/login/cubit/login_cubit.dart';
-import 'package:eshop/features/auth/login/widgets/my_text_form_field.dart';
+import 'package:eshop/core/widgets/my_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -92,7 +92,10 @@ class _LoginFormState extends State<LoginForm> {
             },
             child: Align(
               alignment: Alignment.centerRight,
-              child: Text('Forgot Password?', style: MyStyles.font14w500Grey),
+              child: Text(
+                'Forgot Password?',
+                style: MyTextStyle.font14w400Grey,
+              ),
             ),
           ),
         ],

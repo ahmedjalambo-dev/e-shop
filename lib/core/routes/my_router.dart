@@ -2,16 +2,18 @@ import 'package:eshop/core/di/injection.dart';
 import 'package:eshop/core/routes/my_routes.dart';
 import 'package:eshop/features/auth/forgot_password/cubit/forgot_password_cubit.dart';
 import 'package:eshop/features/auth/forgot_password/ui/screens/forgot_password_screen.dart';
-import 'package:eshop/features/auth/home/ui/screens/home_screen.dart';
+import 'package:eshop/features/home/ui/screens/home_screen.dart';
 import 'package:eshop/features/auth/login/cubit/login_cubit.dart';
 import 'package:eshop/features/auth/login/screens/login_screen.dart';
-import 'package:eshop/features/auth/onboarding/onboarding_screen.dart';
+import 'package:eshop/features/on_boarding/on_boarding_screen.dart';
 import 'package:eshop/features/auth/reset_password/cubit/reset_password_cubit.dart';
 import 'package:eshop/features/auth/reset_password/ui/screens/reset_password_screen.dart';
 import 'package:eshop/features/auth/sign_up/cubit/sign_up_cubit.dart';
 import 'package:eshop/features/auth/sign_up/ui/screens/sign_up_screen.dart';
 import 'package:eshop/features/auth/verify_email/cubit/verify_email_cubit.dart';
 import 'package:eshop/features/auth/verify_email/ui/screens/verify_email_screen.dart';
+import 'package:eshop/features/shop/ui/screens/shop_screen.dart';
+import 'package:eshop/my_root.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +21,7 @@ class MyRouter {
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case MyRoutes.onboarding:
-        return MaterialPageRoute(builder: (context) => OnboardingScreen());
+        return MaterialPageRoute(builder: (context) => OnBoardingScreen());
       case MyRoutes.signUp:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -57,8 +59,8 @@ class MyRouter {
             child: const ResetPasswordScreen(),
           ),
         );
-      case MyRoutes.home:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+      case MyRoutes.root:
+        return MaterialPageRoute(builder: (_) => MyRoot());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

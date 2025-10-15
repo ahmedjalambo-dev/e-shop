@@ -1,10 +1,10 @@
 import 'package:eshop/core/helpers/validator_helper.dart';
 import 'package:eshop/core/helpers/spaceing_helper.dart';
-import 'package:eshop/core/themes/my_styles.dart';
+import 'package:eshop/core/themes/my_text_style.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
 import 'package:eshop/features/auth/forgot_password/cubit/forgot_password_cubit.dart';
 import 'package:eshop/features/auth/forgot_password/ui/widgets/forgot_password_bloc_listener.dart';
-import 'package:eshop/features/auth/login/widgets/my_text_form_field.dart';
+import 'package:eshop/core/widgets/my_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,8 +23,8 @@ class ForgotPasswordScreen extends StatelessWidget {
             children: [
               verticalSapce(50),
               Text(
-                'Enter your email to receive a password reset link.',
-                style: MyStyles.font19w300Black,
+                'Enter your email to receive a OTP code for password reset link.',
+                style: MyTextStyle.font19w300Black,
               ),
               verticalSapce(30),
               Form(
@@ -40,7 +40,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               verticalSapce(40),
               MyTextButton(
                 text: 'Send OTP',
-                textStyle: MyStyles.font22w300LighterGrey,
+                textStyle: MyTextStyle.font14w500White,
                 onPressed: () {
                   validateAndSubmit(context);
                 },

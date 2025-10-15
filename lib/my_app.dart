@@ -1,5 +1,6 @@
 import 'package:eshop/core/routes/my_routes.dart';
 import 'package:eshop/core/themes/my_color.dart';
+import 'package:eshop/my_root.dart';
 import 'package:flutter/material.dart';
 
 import 'package:eshop/core/routes/my_router.dart';
@@ -20,13 +21,20 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'eshop app',
         theme: ThemeData(
+          fontFamily: 'SF-Pro',
           colorScheme: ColorScheme.fromSeed(
             seedColor: MyColor.myBlack,
-          ).copyWith(primary: MyColor.myBlue, secondary: MyColor.myGray),
+          ).copyWith(primary: MyColor.myBlack, secondary: MyColor.myGrey),
           scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(
+            elevation: 0,
+            scrolledUnderElevation: 0,
+            backgroundColor: Colors.transparent,
+          ),
         ),
         onGenerateRoute: myRouter.generateRoute,
-        initialRoute: isLoggedIn ? MyRoutes.home : MyRoutes.onboarding,
+        initialRoute: isLoggedIn ? MyRoutes.root : MyRoutes.onboarding,
+        routes: {MyRoutes.root: (context) => MyRoot()},
       ),
     );
   }

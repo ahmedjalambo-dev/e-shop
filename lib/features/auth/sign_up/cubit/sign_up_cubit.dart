@@ -1,4 +1,3 @@
-import 'package:eshop/core/helpers/validator_helper.dart';
 import 'package:eshop/core/netowoks/api_result.dart';
 import 'package:eshop/features/auth/sign_up/cubit/sign_up_state.dart';
 import 'package:eshop/features/auth/sign_up/data/models/sign_up_request_body.dart';
@@ -15,21 +14,6 @@ class SignUpCubit extends Cubit<SignUpState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
-  // For real-time password validation UI
-  bool hasMinLength = false;
-  bool hasUpperCaseLetter = false;
-  bool hasLowerCaseLetter = false;
-  bool hasDigit = false;
-  bool hasSpecialCharacter = false;
-
-  void updatePasswordValidations(String password) {
-    hasMinLength = ValidatorHelper.validateMinLength(password, 8) == null;
-    hasUpperCaseLetter = ValidatorHelper.validateHasUppercase(password) == null;
-    hasLowerCaseLetter = ValidatorHelper.validateHasLowercase(password) == null;
-    hasDigit = ValidatorHelper.validateHasDigit(password) == null;
-    hasSpecialCharacter =
-        ValidatorHelper.validateHasSpecialCharacter(password) == null;
-  }
 
   void emitSignupStates() async {
     emit(SignUpState.loading());

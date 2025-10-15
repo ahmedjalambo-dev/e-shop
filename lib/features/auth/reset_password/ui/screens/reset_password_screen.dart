@@ -1,8 +1,8 @@
 import 'package:eshop/core/helpers/validator_helper.dart';
 import 'package:eshop/core/helpers/spaceing_helper.dart';
-import 'package:eshop/core/themes/my_styles.dart';
+import 'package:eshop/core/themes/my_text_style.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
-import 'package:eshop/features/auth/login/widgets/my_text_form_field.dart';
+import 'package:eshop/core/widgets/my_text_form_field.dart';
 import 'package:eshop/features/auth/login/widgets/password_validations.dart';
 import 'package:eshop/features/auth/reset_password/cubit/reset_password_cubit.dart';
 import 'package:eshop/features/auth/reset_password/ui/widgets/reset_password_bloc_listener.dart';
@@ -46,7 +46,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   verticalSapce(50),
                   Text(
                     'Enter the OTP and your new password.',
-                    style: MyStyles.font19w300Black,
+                    style: MyTextStyle.font19w300Black,
                   ),
                   verticalSapce(30),
                   MyTextFormField(
@@ -76,7 +76,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   verticalSapce(40),
                   MyTextButton(
                     text: 'Reset Password',
-                    textStyle: MyStyles.font22w300LighterGrey,
+                    textStyle: MyTextStyle.font22w300LighterGrey,
                     onPressed: () => validateAndSubmit(context),
                   ),
                   const ResetPasswordBlocListener(),

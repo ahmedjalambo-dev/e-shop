@@ -38,14 +38,14 @@ class PasswordValidations extends StatelessWidget {
       children: [
         Icon(
           isValid ? Icons.check_circle : Icons.cancel,
-          color: isValid ? Colors.green.shade300 : MyColor.myGray,
+          color: isValid ? Colors.green.shade300 : MyColor.myGrey,
           size: 14,
         ),
         const SizedBox(width: 8),
         Text(
           text,
           style: TextStyle(
-            color: isValid ? Colors.green.shade300 : MyColor.myGray,
+            color: isValid ? Colors.green.shade300 : MyColor.myGrey,
             fontSize: 14,
           ),
         ),

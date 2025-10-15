@@ -1,6 +1,6 @@
 import 'package:eshop/core/helpers/validator_helper.dart';
 import 'package:eshop/core/helpers/spaceing_helper.dart';
-import 'package:eshop/features/auth/login/widgets/my_text_form_field.dart';
+import 'package:eshop/core/widgets/my_text_form_field.dart';
 import 'package:eshop/features/auth/sign_up/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
