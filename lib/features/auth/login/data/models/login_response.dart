@@ -9,6 +9,7 @@ class LoginResponse {
   final String refreshToken;
 
   LoginResponse({required this.accessToken, required this.expiresAtUtc, required this.refreshToken});
+ 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);
 }

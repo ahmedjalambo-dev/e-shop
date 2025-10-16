@@ -38,6 +38,7 @@ class MyTextStyle {
     fontSize: 14.sp,
     color: MyColor.myBlack,
   );
+
   static TextStyle font14w500White = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 14.sp,

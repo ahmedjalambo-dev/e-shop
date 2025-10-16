@@ -8,9 +8,7 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupGetIt();
-
   final userToken = await SharedPrefHelper.getString(SharedPrefKeys.accessToken);
   final bool isLoggedIn = userToken != null && userToken.isNotEmpty;
-
   runApp(MyApp(myRouter: MyRouter(), isLoggedIn: isLoggedIn));
 }
