@@ -18,7 +18,6 @@ class MyRoot extends StatefulWidget {
 
 class _MyRootState extends State<MyRoot> {
   int _selectedIndex = 0;
-  
   static List<Widget> _screens = [
     BlocProvider(
       create: (context) => getIt<HomeCubit>()

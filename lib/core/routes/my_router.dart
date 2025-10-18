@@ -4,6 +4,7 @@ import 'package:eshop/features/auth/forgot_password/cubit/forgot_password_cubit.
 import 'package:eshop/features/auth/forgot_password/ui/screens/forgot_password_screen.dart';
 import 'package:eshop/features/auth/login/cubit/login_cubit.dart';
 import 'package:eshop/features/auth/login/screens/login_screen.dart';
+import 'package:eshop/features/home/cubit/home_cubit.dart';
 import 'package:eshop/features/home/ui/screens/brand_screen.dart';
 import 'package:eshop/features/on_boarding/on_boarding_screen.dart';
 import 'package:eshop/features/auth/reset_password/cubit/reset_password_cubit.dart';
@@ -64,7 +65,10 @@ class MyRouter {
       case MyRoutes.brand:
         final category = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => BrandScreen(category: category),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<HomeCubit>()..getProducts(),
+            child: BrandScreen(category: category),
+          ),
         );
       case MyRoutes.shop:
         return MaterialPageRoute(builder: (_) => ShopScreen());

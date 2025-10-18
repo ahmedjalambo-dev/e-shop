@@ -23,6 +23,7 @@ class PopularNowBlocBuilder extends StatelessWidget {
             child: Row(
               children: List.generate(productsResponse.items.length, (index) {
                 return ProductCard(
+                  horizontalPadding: 12,
                   productImageUrl:
                       productsResponse.items[index].coverPictureUrl,
                   productName: productsResponse.items[index].name,

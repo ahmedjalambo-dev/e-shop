@@ -27,7 +27,10 @@ class ChooseBrandBlocBuilder extends StatelessWidget {
                 index,
               ) {
                 return BrandCard(
-                  onTap: () => context.pushNamed(MyRoutes.brand),
+                  onTap: () => context.pushNamed(
+                    MyRoutes.brand,
+                    arguments: categoriesResponse.categories[index].name,
+                  ),
                   url: categoriesResponse.categories[index].coverPictureUrl,
                 );
               }),

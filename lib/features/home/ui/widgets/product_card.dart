@@ -8,18 +8,25 @@ class ProductCard extends StatelessWidget {
   final String productName;
   final String productDes;
   final int productPrice;
+  final double horizontalPadding;
+  final double verticalPadding;
   const ProductCard({
     super.key,
     required this.productImageUrl,
     required this.productName,
     required this.productDes,
     required this.productPrice,
+    this.horizontalPadding = 0,
+    this.verticalPadding = 0,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: verticalPadding,
+      ),
       child: SizedBox(
         width: 180.w,
         child: Column(
