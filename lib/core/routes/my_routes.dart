@@ -7,6 +7,7 @@ class MyRoutes {
   static const String resetPassword = '/reset_password';
   static const String root = '/root';
   static const String home = '/home';
+  static const String brand = '/brand';
   static const String shop = '/shop';
   static const String favorites = '/favorites';
   static const String cart = '/cart';

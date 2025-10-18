@@ -18,18 +18,34 @@ class MyTextStyle {
     fontSize: 19.sp,
     color: MyColor.myBlack,
   );
-  static TextStyle font15w300Black = TextStyle(
-    fontWeight: FontWeight.w300,
-    fontSize: 15.sp,
+  static TextStyle font18w600Black = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 18.sp,
     color: MyColor.myBlack,
+  );
+  static TextStyle font16w500Grey = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+    color: MyColor.myGrey,
   );
   static TextStyle font14w400Grey = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 14.sp,
     color: MyColor.myGrey,
   );
+  static TextStyle font15w300Black = TextStyle(
+    fontWeight: FontWeight.w300,
+    fontSize: 15.sp,
+    color: MyColor.myBlack,
+  );
+
   static TextStyle font14w400Black = TextStyle(
     fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
+    color: MyColor.myBlack,
+  );
+  static TextStyle font14w600Black = TextStyle(
+    fontWeight: FontWeight.w600,
     fontSize: 14.sp,
     color: MyColor.myBlack,
   );

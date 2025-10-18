@@ -11,8 +11,11 @@ import 'package:eshop/features/auth/sign_up/cubit/sign_up_cubit.dart';
 import 'package:eshop/features/auth/sign_up/data/repos/sign_up_repo.dart';
 import 'package:eshop/features/auth/verify_email/cubit/verify_email_cubit.dart';
 import 'package:eshop/features/auth/verify_email/data/repos/verify_email_repo.dart';
-import 'package:eshop/features/shop/data/repos/categories_repo.dart';
-import 'package:eshop/features/shop/data/services/categories_service.dart';
+import 'package:eshop/features/home/cubit/home_cubit.dart';
+import 'package:eshop/features/home/data/repos/categories_repo.dart';
+import 'package:eshop/features/home/data/repos/prodcuts_repo.dart';
+import 'package:eshop/features/home/data/services/categories_service.dart';
+import 'package:eshop/features/home/data/services/products_service.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -46,8 +49,11 @@ Future<void> setupGetIt() async {
     (email, _) => ResetPasswordCubit(getIt(), email),
   );
 
-  // shop
   getIt.registerLazySingleton<CategoriesService>(() => CategoriesService(dio));
   getIt.registerLazySingleton<CategoriesRepo>(() => CategoriesRepo(getIt()));
-  // getIt.registerFactory(() => CategoriesCubit(getIt()));
+
+  getIt.registerLazySingleton<ProductsService>(() => ProductsService(dio));
+  getIt.registerLazySingleton<ProductsRepo>(() => ProductsRepo(getIt()));
+
+  getIt.registerFactory(() => HomeCubit(getIt(), getIt()));
 }

@@ -1,7 +1,7 @@
 import 'package:eshop/core/netowoks/api_error_handler.dart';
 import 'package:eshop/core/netowoks/api_result.dart';
-import 'package:eshop/features/shop/data/models/categories_response.dart';
-import 'package:eshop/features/shop/data/services/categories_service.dart';
+import 'package:eshop/features/home/data/models/categories_response.dart';
+import 'package:eshop/features/home/data/services/categories_service.dart';
 
 class CategoriesRepo {
   final CategoriesService _categoriesService;

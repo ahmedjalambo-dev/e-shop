@@ -8,6 +8,7 @@ class ApiConstant {
   static const String resetPassword = 'api/auth/reset-password';
   static const String refreshToken = 'api/auth/refresh-token';
   static const String categories = 'api/categories';
+  static const String products = 'api/products';
 }
 
 class ApiErrors {

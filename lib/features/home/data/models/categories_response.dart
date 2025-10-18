@@ -4,18 +4,28 @@ part 'categories_response.g.dart';
 
 @JsonSerializable()
 class CategoriesResponse {
+  final List<Category> categories;
+
+  CategoriesResponse({required this.categories});
+
+  factory CategoriesResponse.fromJson(Map<String, dynamic> json) =>
+      _$CategoriesResponseFromJson(json);
+}
+
+@JsonSerializable()
+class Category {
   final String id;
   final String name;
   final String description;
   final String coverPictureUrl;
 
-  CategoriesResponse({
+  Category({
     required this.id,
     required this.name,
     required this.description,
     required this.coverPictureUrl,
   });
 
-  factory CategoriesResponse.fromJson(Map<String, dynamic> json) =>
-      _$CategoriesResponseFromJson(json);
+  factory Category.fromJson(Map<String, dynamic> json) =>
+      _$CategoryFromJson(json);
 }
