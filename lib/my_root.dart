@@ -1,9 +1,9 @@
 import 'package:eshop/core/di/injection.dart';
+import 'package:eshop/features/cart/cubit/cart_cubit.dart';
+import 'package:eshop/features/cart/cubit/cart_state.dart';
 import 'package:eshop/features/cart/ui/screens/cart_screen.dart';
-import 'package:eshop/features/favorites/ui/screens/favorites_screen.dart';
 import 'package:eshop/features/home/cubit/home_cubit.dart';
 import 'package:eshop/features/home/ui/screens/home_screen.dart';
-import 'package:eshop/features/shop/ui/screens/shop_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,15 +25,35 @@ class _MyRootState extends State<MyRoot> {
         ..getProducts(),
       child: HomeScreen(),
     ),
-    ShopScreen(),
-    FavoritesScreen(),
-    CartScreen(),
+    HomeScreen(),
+    HomeScreen(),
+    BlocProvider(
+      create: (context) => getIt<CartCubit>()..getCart(),
+      child: CartScreen(),
+    ),
   ];
+  void _onItemTapped(int index) {
+    setState(() => _selectedIndex = index);
+    // Fetch cart data when Cart tab (index 3) is selected, if not already loaded
+    if (index == 3) {
+      final cartCubit = getIt<CartCubit>();
+      // Only fetch if initial or error state to avoid redundant calls
+      cartCubit.state.maybeWhen(
+        initial: () => cartCubit.getCart(),
+        getCartFailure: (_) => cartCubit.getCart(),
+        orElse: () {}, // Do nothing if already loading or success
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: IndexedStack(
+        // Use IndexedStack to preserve state
+        index: _selectedIndex,
+        children: _screens,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (index) {

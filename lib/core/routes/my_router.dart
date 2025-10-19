@@ -5,6 +5,7 @@ import 'package:eshop/features/auth/forgot_password/ui/screens/forgot_password_s
 import 'package:eshop/features/auth/login/cubit/login_cubit.dart';
 import 'package:eshop/features/auth/login/screens/login_screen.dart';
 import 'package:eshop/features/home/cubit/home_cubit.dart';
+import 'package:eshop/features/home/data/models/products_response.dart';
 import 'package:eshop/features/home/ui/screens/brand_screen.dart';
 import 'package:eshop/features/on_boarding/on_boarding_screen.dart';
 import 'package:eshop/features/auth/reset_password/cubit/reset_password_cubit.dart';
@@ -13,7 +14,7 @@ import 'package:eshop/features/auth/sign_up/cubit/sign_up_cubit.dart';
 import 'package:eshop/features/auth/sign_up/ui/screens/sign_up_screen.dart';
 import 'package:eshop/features/auth/verify_email/cubit/verify_email_cubit.dart';
 import 'package:eshop/features/auth/verify_email/ui/screens/verify_email_screen.dart';
-import 'package:eshop/features/shop/ui/screens/shop_screen.dart';
+import 'package:eshop/features/product_details/ui/screens/product_details_screen.dart';
 import 'package:eshop/my_root.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,8 +71,11 @@ class MyRouter {
             child: BrandScreen(category: category),
           ),
         );
-      case MyRoutes.shop:
-        return MaterialPageRoute(builder: (_) => ShopScreen());
+      case MyRoutes.productDetails:
+        final product = settings.arguments as Product;
+        return MaterialPageRoute(
+          builder: (_) => ProductDetailsScreen(product: product),
+        );
 
       default:
         return null;

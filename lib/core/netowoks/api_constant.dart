@@ -9,6 +9,8 @@ class ApiConstant {
   static const String refreshToken = 'api/auth/refresh-token';
   static const String categories = 'api/categories';
   static const String products = 'api/products';
+  static const String cartItems = 'api/cart/items';
+  static const String cart = 'api/cart';
 }
 
 class ApiErrors {

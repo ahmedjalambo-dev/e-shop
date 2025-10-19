@@ -13,10 +13,10 @@ ProductsRequestBody _$ProductsRequestBodyFromJson(Map<String, dynamic> json) =>
       minPrice: (json['minPrice'] as num?)?.toInt() ?? 0,
       maxPrice: (json['maxPrice'] as num?)?.toInt() ?? 100000,
       isInStock: json['isInStock'] as bool? ?? false,
-      sortBy: json['sortBy'] as String? ?? 'name',
+      sortBy: json['sortBy'] as String? ?? '',
       sortOrder: json['sortOrder'] as String? ?? 'asc',
       page: (json['page'] as num?)?.toInt() ?? 1,
-      pageSize: (json['pageSize'] as num?)?.toInt() ?? 10,
+      pageSize: (json['pageSize'] as num?)?.toInt() ?? 20,
     );
 
 Map<String, dynamic> _$ProductsRequestBodyToJson(

@@ -11,5 +11,5 @@ class MyRoutes {
   static const String shop = '/shop';
   static const String favorites = '/favorites';
   static const String cart = '/cart';
-
+  static const String productDetails = '/productDetails';
 }

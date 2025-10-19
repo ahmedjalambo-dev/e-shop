@@ -1,6 +1,7 @@
 import 'package:eshop/core/themes/my_text_style.dart';
 import 'package:eshop/features/home/cubit/home_cubit.dart';
 import 'package:eshop/features/home/cubit/home_state.dart';
+import 'package:eshop/features/home/data/models/products_response.dart';
 import 'package:eshop/features/home/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,12 +36,10 @@ class BrandScreen extends StatelessWidget {
               itemCount: productsResponse.items.length,
               padding: EdgeInsets.symmetric(horizontal: 20),
               itemBuilder: (context, index) {
+                // Get the product object
+                final Product product = productsResponse.items[index];
                 return ProductCard(
-                  productImageUrl:
-                      productsResponse.items[index].coverPictureUrl,
-                  productName: productsResponse.items[index].name,
-                  productDes: productsResponse.items[index].description,
-                  productPrice: productsResponse.items[index].price.toInt(),
+                  product: product, // Pass the full product object
                 );
               },
             ),

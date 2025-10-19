@@ -1,5 +1,6 @@
 import 'package:eshop/features/home/cubit/home_cubit.dart';
 import 'package:eshop/features/home/cubit/home_state.dart';
+import 'package:eshop/features/home/data/models/products_response.dart';
 import 'package:eshop/features/home/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,13 +23,11 @@ class PopularNowBlocBuilder extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: List.generate(productsResponse.items.length, (index) {
+                // Get the product object
+                final Product product = productsResponse.items[index];
                 return ProductCard(
                   horizontalPadding: 12,
-                  productImageUrl:
-                      productsResponse.items[index].coverPictureUrl,
-                  productName: productsResponse.items[index].name,
-                  productDes: productsResponse.items[index].description,
-                  productPrice: productsResponse.items[index].price.toInt(),
+                  product: product, // Pass the full product object
                 );
               }),
             ),
