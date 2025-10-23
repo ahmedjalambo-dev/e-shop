@@ -1,4 +1,3 @@
-import 'package:eshop/core/di/injection.dart';
 import 'package:eshop/core/helpers/spaceing_helper.dart';
 import 'package:eshop/core/themes/my_text_style.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
@@ -15,23 +14,13 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ensure Cubit is provided if not already available higher up
-    // Typically done in MyRoot or where the BottomNavBar is managed
-    final cartCubit = getIt<CartCubit>();
+    final cartCubit = context.read<CartCubit>();
 
-    // Fetch cart when the screen is built (if not already fetched)
-    // Consider fetching when the Cart tab is selected in MyRoot
-    if (cartCubit.state == const CartState.initial()) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        cartCubit.getCart();
-      });
-    }
     return Scaffold(
       appBar: AppBar(
         title: Text('My Cart', style: MyTextStyle.font22w500Black),
       ),
       body: BlocConsumer<CartCubit, CartState>(
-        bloc: cartCubit,
         listenWhen: (previous, current) =>
             current is UpdateItemSuccess ||
             current is UpdateItemFailure ||
@@ -45,20 +34,13 @@ class CartScreen extends StatelessWidget {
                 _showErrorSnackBar(context, message),
           );
         },
-        // --- MODIFICATION START ---
         buildWhen: (previous, current) {
-          // Rebuild when fetching the whole cart OR when an item starts/stops loading for update/delete
           return current is GetCartLoading ||
               current is GetCartSuccess ||
               current is GetCartFailure ||
-              current
-                  is UpdateItemLoading || // Rebuild to show item loading on update
-              current
-                  is DeleteItemLoading; // Rebuild to show item loading on delete
-          // No need to rebuild on Update/Delete Success/Failure here,
-          // because getCart() is called which triggers GetCartLoading/Success/Failure
+              current is UpdateItemLoading ||
+              current is DeleteItemLoading;
         },
-        // --- MODIFICATION END ---
         builder: (context, state) {
           return state.maybeWhen(
             getCartLoading: () =>
@@ -87,9 +69,7 @@ class CartScreen extends StatelessWidget {
               }
               return _buildCartContent(context, cartCubit, cartData);
             },
-            orElse: () => const Center(
-              child: Text('Something went wrong'),
-            ), // Or handle initial state
+            orElse: () => const Center(child: CircularProgressIndicator()),
           );
         },
       ),
@@ -101,7 +81,7 @@ class CartScreen extends StatelessWidget {
     CartCubit cartCubit,
     GetCartResponse cartData,
   ) {
-    final totalPrice = cartCubit.calculateTotalPrice(); // Use helper method
+    final totalPrice = cartCubit.calculateTotalPrice();
 
     return Column(
       children: [
@@ -111,7 +91,7 @@ class CartScreen extends StatelessWidget {
             itemCount: cartData.cartItems.length,
             itemBuilder: (context, index) {
               final item = cartData.cartItems[index];
-              // Check loading state for specific item
+
               bool isUpdating = cartCubit.state.maybeWhen(
                 updateItemLoading: (loadingItemId) =>
                     loadingItemId == item.itemId,
@@ -122,6 +102,7 @@ class CartScreen extends StatelessWidget {
                     loadingItemId == item.itemId,
                 orElse: () => false,
               );
+
               return CartItemCard(
                 item: item,
                 isUpdating: isUpdating,
@@ -130,7 +111,7 @@ class CartScreen extends StatelessWidget {
             },
           ),
         ),
-        // Summary and Checkout Button
+
         Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           decoration: BoxDecoration(
@@ -140,7 +121,7 @@ class CartScreen extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.2),
                 spreadRadius: 1,
                 blurRadius: 5,
-                offset: const Offset(0, -3), // changes position of shadow
+                offset: const Offset(0, -3),
               ),
             ],
           ),
@@ -161,8 +142,11 @@ class CartScreen extends StatelessWidget {
                 text: 'Proceed to Checkout',
                 textStyle: MyTextStyle.font14w500White,
                 onPressed: () {
-                  // TODO: Implement checkout navigation/logic
-                  print('Proceeding to checkout');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Checkout feature coming soon!'),
+                    ),
+                  );
                 },
               ),
             ],

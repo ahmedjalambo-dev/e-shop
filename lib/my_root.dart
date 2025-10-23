@@ -1,6 +1,5 @@
 import 'package:eshop/core/di/injection.dart';
 import 'package:eshop/features/cart/cubit/cart_cubit.dart';
-import 'package:eshop/features/cart/cubit/cart_state.dart';
 import 'package:eshop/features/cart/ui/screens/cart_screen.dart';
 import 'package:eshop/features/home/cubit/home_cubit.dart';
 import 'package:eshop/features/home/ui/screens/home_screen.dart';
@@ -18,47 +17,42 @@ class MyRoot extends StatefulWidget {
 
 class _MyRootState extends State<MyRoot> {
   int _selectedIndex = 0;
-  static List<Widget> _screens = [
+  late final CartCubit _cartCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cartCubit = getIt<CartCubit>();
+  }
+
+  List<Widget> get _screens => [
     BlocProvider(
       create: (context) => getIt<HomeCubit>()
         ..getCategories()
         ..getProducts(),
-      child: HomeScreen(),
+      child: const HomeScreen(),
     ),
-    HomeScreen(),
-    HomeScreen(),
-    BlocProvider(
-      create: (context) => getIt<CartCubit>()..getCart(),
-      child: CartScreen(),
-    ),
+    const Center(child: Text('Shop')),
+    const Center(child: Text('Favorites')),
+    BlocProvider.value(value: _cartCubit, child: const CartScreen()),
   ];
+
   void _onItemTapped(int index) {
     setState(() => _selectedIndex = index);
-    // Fetch cart data when Cart tab (index 3) is selected, if not already loaded
+
+    // Refresh cart when navigating to cart tab
     if (index == 3) {
-      final cartCubit = getIt<CartCubit>();
-      // Only fetch if initial or error state to avoid redundant calls
-      cartCubit.state.maybeWhen(
-        initial: () => cartCubit.getCart(),
-        getCartFailure: (_) => cartCubit.getCart(),
-        orElse: () {}, // Do nothing if already loading or success
-      );
+      _cartCubit.getCart();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        // Use IndexedStack to preserve state
-        index: _selectedIndex,
-        children: _screens,
-      ),
+      body: IndexedStack(index: _selectedIndex, children: _screens),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() => _selectedIndex = index);
-        },
+        onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         unselectedFontSize: 10.sp,
         selectedFontSize: 10.sp,

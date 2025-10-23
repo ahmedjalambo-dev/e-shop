@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:eshop/core/di/injection.dart'; // Import GetIt instance
-import 'package:eshop/core/extentions/extentions.dart'; // For context.pop()
+import 'package:eshop/core/di/injection.dart';
+import 'package:eshop/core/extentions/extentions.dart';
 import 'package:eshop/core/helpers/spaceing_helper.dart';
 import 'package:eshop/core/themes/my_color.dart';
 import 'package:eshop/core/themes/my_text_style.dart';
 import 'package:eshop/core/widgets/my_text_button.dart';
-import 'package:eshop/features/cart/cubit/cart_cubit.dart'; // Import CartCubit
-import 'package:eshop/features/cart/cubit/cart_state.dart'; // Import CartState
+import 'package:eshop/features/cart/cubit/cart_cubit.dart';
+import 'package:eshop/features/cart/cubit/cart_state.dart';
 import 'package:eshop/features/home/data/models/products_response.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; // Import BlocProvider
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -18,10 +18,8 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Provide the CartCubit if it's not provided higher up
     return BlocProvider.value(
-      // Or BlocProvider(create: (_) => getIt<CartCubit>()) if needed
-      value: getIt<CartCubit>(), // Use existing instance from GetIt
+      value: getIt<CartCubit>(),
       child: Scaffold(
         appBar: AppBar(
           title: Text('Product Details', style: MyTextStyle.font22w500Black),
@@ -82,29 +80,27 @@ class ProductDetailsScreen extends StatelessWidget {
                 listener: (context, state) {
                   state.whenOrNull(
                     addItemLoading: () {
-                      // Show loading indicator (optional, could be on the button)
                       showDialog(
                         context: context,
-                        barrierDismissible: false, // Prevent dismissing
+                        barrierDismissible: false,
                         builder: (context) =>
                             const Center(child: CircularProgressIndicator()),
                       );
                     },
                     addItemSuccess: (message) {
-                      // The variable is the message string
-                      context.pop(); // Dismiss loading dialog
+                      context.pop();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(message), // Use the string directly
+                          content: Text(message),
                           backgroundColor: Colors.green,
                         ),
                       );
                     },
                     addItemFailure: (message) {
-                      context.pop(); // Dismiss loading dialog
+                      context.pop();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(message.toString()),
+                          content: Text(message),
                           backgroundColor: Colors.red,
                         ),
                       );
@@ -114,7 +110,6 @@ class ProductDetailsScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: BlocBuilder<CartCubit, CartState>(
-                    // To disable button while loading
                     builder: (context, state) {
                       final isLoading = state.maybeWhen(
                         addItemLoading: () => true,
@@ -123,13 +118,12 @@ class ProductDetailsScreen extends StatelessWidget {
                       return MyTextButton(
                         text: isLoading ? 'Adding...' : 'Add to Cart',
                         textStyle: MyTextStyle.font14w500White,
-                        // Disable button when loading
                         onPressed: isLoading
                             ? () {}
                             : () {
                                 context.read<CartCubit>().addItemToCart(
                                   productId: product.id,
-                                  // quantity: 1, // Default quantity or allow user selection
+                                  quantity: 1,
                                 );
                               },
                       );

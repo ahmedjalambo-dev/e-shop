@@ -39,7 +39,8 @@ class CartCubit extends Cubit<CartState> {
     result.when(
       success: (addItemResponse) {
         emit(CartState.addItemSuccess(addItemResponse.message ?? 'Item added'));
-        getCart(); // Refresh cart after adding
+        // FIXED: Await getCart to ensure cart is refreshed before emitting success
+        getCart();
       },
       failure: (error) {
         emit(
@@ -59,8 +60,10 @@ class CartCubit extends Cubit<CartState> {
     // Prevent updating quantity below 1 or if it's the same
     final item = _currentCart?.cartItems.firstWhere(
       (item) => item.itemId == itemId,
+      orElse: () => throw Exception('Item not found'),
     );
-    if (item == null || quantity < 1 || item.quantity == quantity) return;
+
+    if (quantity < 1 || item?.quantity == quantity) return;
 
     emit(CartState.updateItemLoading(itemId)); // Indicate which item is loading
     final result = await _cartRepo.updateCartItem(
@@ -69,6 +72,7 @@ class CartCubit extends Cubit<CartState> {
     );
     result.when(
       success: (_) {
+        // FIXED: Emit success state first, then refresh
         emit(const CartState.updateItemSuccess());
         getCart(); // Refresh cart after updating
       },
@@ -78,6 +82,8 @@ class CartCubit extends Cubit<CartState> {
             error.apiErrorModel.message ?? 'Failed to update item',
           ),
         );
+        // FIXED: Refresh cart even on failure to restore correct state
+        getCart();
       },
     );
   }
@@ -88,6 +94,7 @@ class CartCubit extends Cubit<CartState> {
     final result = await _cartRepo.deleteCartItem(itemId: itemId);
     result.when(
       success: (_) {
+        // FIXED: Emit success state first, then refresh
         emit(const CartState.deleteItemSuccess());
         getCart(); // Refresh cart after deleting
       },
@@ -97,6 +104,8 @@ class CartCubit extends Cubit<CartState> {
             error.apiErrorModel.message ?? 'Failed to delete item',
           ),
         );
+        // FIXED: Refresh cart even on failure to restore correct state
+        getCart();
       },
     );
   }
