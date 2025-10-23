@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:eshop/core/netowoks/api_constant.dart';
 import 'package:eshop/features/cart/data/models/add_item_to_cart_request_body.dart';
 import 'package:eshop/features/cart/data/models/add_item_to_cart_response.dart';
+import 'package:eshop/features/cart/data/models/delete_item_request_body.dart';
 import 'package:eshop/features/cart/data/models/get_cart_response.dart';
 import 'package:eshop/features/cart/data/models/update_item_request_body.dart';
 import 'package:eshop/features/cart/data/models/update_item_response.dart';
@@ -27,6 +28,11 @@ abstract class CartService {
     @Body() UpdateItemRequestBody updateItemRequestBody,
   );
 
-  @DELETE("${ApiConstant.cartItems}/{id}") // Note the path parameter
-  Future<void> deleteCartItem(@Path("id") String itemId); // Returns 200 OK (void)
+  @DELETE(
+    "${ApiConstant.cartItems}/{Id}",
+  ) // Ensure path uses {Id} (uppercase I)
+  Future<void> deleteCartItem(
+    @Path("Id") String itemId, // Ensure @Path uses "Id" (uppercase I)
+    @Body() DeleteItemRequestBody body, // Add the body parameter
+  );
 }

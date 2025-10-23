@@ -31,8 +31,7 @@ class CartScreen extends StatelessWidget {
         title: Text('My Cart', style: MyTextStyle.font22w500Black),
       ),
       body: BlocConsumer<CartCubit, CartState>(
-        // Use BlocConsumer for listening to update/delete results
-        bloc: cartCubit, // Explicitly provide the bloc instance
+        bloc: cartCubit,
         listenWhen: (previous, current) =>
             current is UpdateItemSuccess ||
             current is UpdateItemFailure ||
@@ -40,18 +39,26 @@ class CartScreen extends StatelessWidget {
             current is DeleteItemFailure,
         listener: (context, state) {
           state.whenOrNull(
-            // Handle feedback for background operations
             updateItemFailure: (message) =>
                 _showErrorSnackBar(context, message),
             deleteItemFailure: (message) =>
                 _showErrorSnackBar(context, message),
-            // Success feedback is implicitly handled by the UI rebuilding via getCart()
           );
         },
-        buildWhen: (previous, current) =>
-            current is GetCartLoading ||
-            current is GetCartSuccess ||
-            current is GetCartFailure,
+        // --- MODIFICATION START ---
+        buildWhen: (previous, current) {
+          // Rebuild when fetching the whole cart OR when an item starts/stops loading for update/delete
+          return current is GetCartLoading ||
+              current is GetCartSuccess ||
+              current is GetCartFailure ||
+              current
+                  is UpdateItemLoading || // Rebuild to show item loading on update
+              current
+                  is DeleteItemLoading; // Rebuild to show item loading on delete
+          // No need to rebuild on Update/Delete Success/Failure here,
+          // because getCart() is called which triggers GetCartLoading/Success/Failure
+        },
+        // --- MODIFICATION END ---
         builder: (context, state) {
           return state.maybeWhen(
             getCartLoading: () =>

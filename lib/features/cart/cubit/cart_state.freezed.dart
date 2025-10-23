@@ -326,12 +326,12 @@ $GetCartSuccessCopyWith<GetCartSuccess> get copyWith => _$GetCartSuccessCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetCartSuccess&&const DeepCollectionEquality().equals(other.cartData, cartData));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetCartSuccess&&(identical(other.cartData, cartData) || other.cartData == cartData));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(cartData));
+int get hashCode => Object.hash(runtimeType,cartData);
 
 @override
 String toString() {
@@ -363,9 +363,9 @@ class _$GetCartSuccessCopyWithImpl<$Res>
 
 /// Create a copy of CartState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? cartData = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? cartData = null,}) {
   return _then(GetCartSuccess(
-freezed == cartData ? _self.cartData : cartData // ignore: cast_nullable_to_non_nullable
+null == cartData ? _self.cartData : cartData // ignore: cast_nullable_to_non_nullable
 as GetCartResponse,
   ));
 }

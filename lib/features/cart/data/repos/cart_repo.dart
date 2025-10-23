@@ -2,6 +2,7 @@ import 'package:eshop/core/netowoks/api_error_handler.dart';
 import 'package:eshop/core/netowoks/api_result.dart';
 import 'package:eshop/features/cart/data/models/add_item_to_cart_request_body.dart';
 import 'package:eshop/features/cart/data/models/add_item_to_cart_response.dart';
+import 'package:eshop/features/cart/data/models/delete_item_request_body.dart';
 import 'package:eshop/features/cart/data/models/get_cart_response.dart';
 import 'package:eshop/features/cart/data/models/update_item_request_body.dart';
 import 'package:eshop/features/cart/data/models/update_item_response.dart';
@@ -54,8 +55,10 @@ class CartRepo {
 
   Future<ApiResult<void>> deleteCartItem({required String itemId}) async {
     try {
-      // API returns 200 OK with no body, so we expect void
-      await _cartService.deleteCartItem(itemId);
+      // Create the request body
+      final requestBody = DeleteItemRequestBody(id: itemId);
+      // Pass both itemId for the path and the requestBody
+      await _cartService.deleteCartItem(itemId, requestBody);
       return ApiResult.success(null); // Success with no data
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
